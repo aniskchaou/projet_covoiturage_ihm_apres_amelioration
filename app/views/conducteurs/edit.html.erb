@@ -1,0 +1,14 @@
+<h1>modifier conducteur</h1>
+<%= form_for @conducteur, :url =>{:action => "update", :id =>@conducteur} do |f| %>
+
+<label>membre</label>
+<%= f.collection_select :idMembre, Membre.all, :id, :nom %>
+<label>grade</label>
+<p> <%= f.text_field 'grade' %></p>
+
+<%= f.submit "modifier" %>
+<% end %>
+
+
+
+<%= link_to 'retour', {:action => 'index' } %>

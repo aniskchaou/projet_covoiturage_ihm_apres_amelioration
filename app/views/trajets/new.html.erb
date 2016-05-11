@@ -1,0 +1,29 @@
+<h1>ajouter trajet</h1>
+<%= form_tag :action => 'create' do %>
+
+
+
+<p><label for = "conducteur">Conducteur</label>
+<%= collection_select(:trajets, :id_conducteur, @membres, :id, :nom, prompt: true)
+%>
+
+
+
+<p><label for = "voiture">Voiture</label>:
+<%= collection_select(:trajets, :id_voiture, @voitures, :id, :marque, prompt: true)
+%>
+
+
+<p><label for = "ville_source">Ville source</label>:
+<%= collection_select(:trajets, :id_ville_source, @villes, :id, :nom_ville, prompt: true)
+%>
+
+<p><label for = "ville_destination">Ville destination</label>
+<%= collection_select(:trajets, :id_ville_destination, @villes, :id, :nom_ville, prompt: true)
+%>
+<br>
+
+
+<%= submit_tag "Create" %>
+<% end -%>
+<%= link_to 'Back', {:action => 'index'} %>

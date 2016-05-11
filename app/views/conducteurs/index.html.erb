@@ -1,0 +1,17 @@
+<h1>liste conducteur</h1>
+<% if @conducteurs.blank? %>
+<p>Il n'y a pas de conducteurs actuellement dans le système.</p>
+<% else %>
+
+<ul id = "conducteurs">
+	<% @conducteurs.each do |c| %>
+	<li><%= link_to c.grade, {:action => 'show', :id => c.id} %></li>
+   <%= link_to 'Edit', {:action => 'edit',:id => c.id} %>
+   <%= link_to 'delete', {:action => 'delete',:id => c.id},:confirm => "Are you sure you want to delete" %>
+
+    <% end %>	
+ 
+<% end %>
+</ul>	
+
+<%= link_to 'ajouter conducteur', {:action => 'new'} %>

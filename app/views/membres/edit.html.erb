@@ -1,0 +1,22 @@
+<h1>modifier membre</h1>
+
+<%= form_for @membre, :url =>{:action => "update", :id =>@membre} do |f| %>
+
+
+<label>nom</label>
+<p> <%= f.text_field 'nom' %></p>
+<label>prenom</label>
+<p> <%= f.text_field 'prenom' %></p>
+<label>age</label>
+<p> <%= f.text_field 'age' %></p>
+<label>email</label>
+<p><%= f.text_field 'email' %></p>
+<label>mdp</label>
+<p> <%= f.text_field 'mdp' %></p>
+
+<%= f.submit "modifier" %>
+<% end %>
+
+
+
+<%= link_to 'Back', {:action => 'index' } %>

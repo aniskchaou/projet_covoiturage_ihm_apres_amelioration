@@ -1,0 +1,19 @@
+<h1>edit voiture</h1>
+<%= form_for @voiture, :url =>{:action => "update", :id =>@voiture} do |f| %>
+
+<label>marque: </label>
+<p><%= f.text_field 'marque' %></p>
+
+<label>matricule:</label>
+<p> <%= f.text_field 'matricule' %></p>
+
+
+<label>couleur</label>
+<%= f.text_area 'couleur' %></p>
+
+<label>nombre de place</label>
+<%= f.text_area 'nb_place' %></p>
+
+<%= f.submit "modifier" %>
+<% end %>
+<%= link_to 'Back', {:action => 'index' } %>

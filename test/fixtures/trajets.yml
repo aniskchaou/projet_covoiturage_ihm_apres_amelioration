@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id_conducteur: 1
+  id_voiture: 1
+  id_avis: 1
+  id_ville_source: MyText
+  id_ville_destination: MyText
+  date: MyText
+
+two:
+  id_conducteur: 1
+  id_voiture: 1
+  id_avis: 1
+  id_ville_source: MyText
+  id_ville_destination: MyText
+  date: MyText

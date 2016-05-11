@@ -1,0 +1,17 @@
+<h1>liste villes</h1>
+<% if @villes.blank? %>
+<p>Il n'y a pas de livres actuellement dans le système.</p>
+<% else %>
+
+<ul id = "villes">
+<% @villes.each do |c| %>
+<li><%= link_to c.nom_ville, {:action => 'show', :id => c.id} -%>
+<%= link_to " edit", {:action => 'edit', :id => c.id} -%>
+<%= link_to 'delete', {:action => 'delete',:id => c.id},:confirm => "Are you sure you want to delete" -%>
+<% end %>
+</li>
+</ul>
+<% end %>
+
+
+<p><%= link_to "ajouter nouveau voiture", {:action => 'new' }%></p>

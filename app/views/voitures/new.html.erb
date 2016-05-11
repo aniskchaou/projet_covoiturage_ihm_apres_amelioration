@@ -1,0 +1,23 @@
+<h1>nouveau voiture</h1>
+<%= form_tag :action => 'create' do %>
+
+
+<p><label for = "book_price">nombre de places</label>:
+<%= text_field 'voitures', 'nb_place' %></p>
+
+
+<p><label for = "book_subject_id">marque</label>:
+<%= text_area 'voitures', 'marque' %></p></p>
+
+<p><label for = "book_description">couleur</label>
+<%= text_area 'voitures', 'couleur' %></p>
+
+<p><label for = "book_description">matricule</label>
+<%= text_area 'voitures', 'matricule' %></p>
+
+
+<%= submit_tag "ajouter" %>
+
+
+<% end -%>
+<%= link_to 'Back', {:action => 'index'} %>

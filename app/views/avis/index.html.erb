@@ -1,0 +1,19 @@
+<h1>liste avis</h1>
+<% if @avis.blank? %>
+<p>Il n'y a pas d'avis actuellement dans le système.</p>
+<% else %>
+
+<ul id = "avis">
+<% @avis.each do |c| %>
+<li><%= link_to c.id, {:action => 'show', :id => c.id} -%>
+<%= link_to "edit", {:action => 'edit', :id => c.id} -%>
+<%= link_to 'delete', {:action => 'delete',:id => c.id},:confirm => "Are you sure you want to delete" %>
+</li>
+
+<% end %>
+
+</ul>
+<% end %>
+
+
+<p><%= link_to "ajouter nouveau avis", {:action => 'new' }%></p>

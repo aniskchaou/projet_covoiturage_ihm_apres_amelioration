@@ -1,0 +1,9 @@
+<h1><%= @voiture.marque %></h1>
+<p>
+<strong>Price: </strong> $<%= @voiture.nb_place %><br />
+<strong>Subject :</strong> <%= @voiture.matricule %><br />
+<strong>Created Date:</strong> <%= @voiture.couleur %><br />
+</p>
+
+<hr />
+<%= link_to 'Back', {:action => 'index'} %>

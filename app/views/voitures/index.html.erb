@@ -1,0 +1,17 @@
+<h1>liste voiture</h1>
+<% if @voitures.blank? %>
+<p>Il n'y a pas de livres actuellement dans le système.</p>
+<% else %>
+
+<ul id = "voitures">
+<% @voitures.each do |c| %>
+<li><%= link_to c.marque, {:action => 'show', :id => c.id} -%>
+<%= link_to "edit", {:action => 'edit', :id => c.id} -%>
+<%= link_to "supprimer", {:action => 'delete', :id => c.id} -%>
+<% end %>
+</li>
+</ul>
+<% end %>
+
+
+<p><%= link_to "Ajouter  voiture", {:action => 'new' }%></p>

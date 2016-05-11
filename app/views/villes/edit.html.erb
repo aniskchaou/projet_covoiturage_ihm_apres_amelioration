@@ -1,0 +1,7 @@
+<h1>edit ville</h1>
+<%= form_for @ville, :url =>{:action => "update", :id =>@ville} do |f| %>
+<p>nom ville: <%= f.text_field 'nom_ville' %></p>
+
+<%= f.submit "modifier" %>
+<% end %>
+<%= link_to 'Back', {:action => 'index' } %>

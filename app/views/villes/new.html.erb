@@ -1,0 +1,11 @@
+<%= form_tag :action => 'create' do %>
+
+
+<p><label for = "ville">nom ville</label>:
+<%= text_field 'villes', 'nom_ville' %></p>
+
+<%= submit_tag "Create" %>
+
+
+<% end -%>
+<%= link_to 'Back', {:action => 'index'} %>
