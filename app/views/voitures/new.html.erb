@@ -1,23 +1,133 @@
-<h1>nouveau voiture</h1>
-<%= form_tag :action => 'create' do %>
 
 
-<p><label for = "book_price">nombre de places</label>:
-<%= text_field 'voitures', 'nb_place' %></p>
 
 
-<p><label for = "book_subject_id">marque</label>:
-<%= text_area 'voitures', 'marque' %></p></p>
-
-<p><label for = "book_description">couleur</label>
-<%= text_area 'voitures', 'couleur' %></p>
-
-<p><label for = "book_description">matricule</label>
-<%= text_area 'voitures', 'matricule' %></p>
 
 
-<%= submit_tag "ajouter" %>
+<% session[:current_user_id].each do |m| %>
+<% @va=  m["id"]       %>
+
+<% end %>
 
 
-<% end -%>
-<%= link_to 'Back', {:action => 'index'} %>
+
+
+
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+<title>Détail Trajet</title></head>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css" media="screen, projection">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css" media="screen, projection">
+<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css" media="screen, projection">
+<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" media="screen, projection">
+<link rel="stylesheet" type="text/css" href="css/bootstraapt.css" media="screen, projection">
+<link rel="stylesheet" type="text/css" href="css/footer-basic-centered.css" media="screen, projection">
+<!-- /css -->
+
+<!-- js -->
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/npm.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<!-- /js -->
+
+<header class="header-login-signup">
+
+	<div class="header-limiter">
+
+		<nav class="bootstraapt">
+			<div class="navbar-header">
+
+				<%= image_tag  'logo1.png' ,'height':134 ,'width':154 %>
+			</div>
+		</nav>
+
+		<nav>
+			<a href="#">Home</a>
+			<a href="#" class="selected">Blog</a>
+			<a href="#">Pricing</a>
+		</nav>
+
+		<ul>
+			<li><a href="#">Login</a></li>
+			<li><a href="#">Sign up</a></li>
+		</ul>
+
+	</div>
+
+</header>
+<body style="padding-left: 115px;padding-right: 115px;">
+
+	<!-- Menu pricipal -->
+	<ul class="nav nav-tabs">
+		<li role="presentation" class="active"><a href="#">Home</a></li>
+		<li role="presentation"><a href="#">Profile</a></li>
+		<li role="presentation"><a href="#">Messages</a></li>
+	</ul>
+	<!-- Menu pricipal -->
+	<!--Breadcrumbs-->
+	<ol class="breadcrumb">
+		<li><a href="#">Home</a></li>
+		<li><a href="#">Library</a></li>
+		<li class="active">Data</li>
+	</ol>
+	<!--/Breadcrumbs-->
+	<!--2row 2/3 et 1/3 -->
+	<div class="row">
+		<div class="col-xs-12 col-md-8">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<%= form_tag :action => 'create' do %>
+
+
+					<p><label for = "book_price">nombre de places</label>:
+						<%= text_field 'voitures', 'nb_place' %></p>
+
+
+						<p><label for = "book_subject_id">marque</label>:
+							<%= text_field 'voitures', 'marque' %></p></p>
+
+							<p><label for = "book_description">couleur</label>
+								<%= text_field 'voitures', 'couleur' %></p>
+
+								<p><label for = "book_description">matricule</label>
+									<%= text_field 'voitures', 'matricule' %></p>
+
+
+									<%= submit_tag "ajouter" %>
+
+
+									<% end -%>
+									<%= link_to 'Back', {:action => 'index'} %>
+
+
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<!--/2row 2/3 et 1/3 -->
+
+			</body>
+			<footer class="footer-basic-centered">
+
+				<p class="footer-company-motto">Covoiturage</p>
+
+				<p class="footer-links">
+					<a href="#">inscrption</a>
+					·
+					<a href="#">Blog</a>
+				</p>
+
+				<p class="footer-company-name">Company Name &copy; 2016</p>
+
+			</footer></html>
+			</html>

@@ -40,14 +40,12 @@
 		</nav>
 
 		<nav>
-			<a href="#">Home</a>
-			<a href="#" class="selected">Blog</a>
-			<a href="#">Pricing</a>
+			
 		</nav>
 
 		<ul>
-			<li><a href="#">Login</a></li>
-			<li><a href="#">Sign up</a></li>
+			<li><a href="/membres/connexion">Login</a></li>
+			<li><a href="/membres/new">Inscription</a></li>
 		</ul>
 
 	</div>
@@ -57,16 +55,14 @@
 <body style="padding-left: 115px;padding-right: 115px;">
 <!-- Menu pricipal -->
 <ul class="nav nav-tabs">
-  <li role="presentation" class="active"><a href="#">Home</a></li>
-  <li role="presentation"><a href="#">Profile</a></li>
-  <li role="presentation"><a href="#">Messages</a></li>
+  <li role="presentation" class="active"><a href="/trajets/search">Home</a></li>
+ 
 </ul>
 <!-- Menu pricipal -->
 <!--Breadcrumbs-->
 <ol class="breadcrumb">
-  <li><a href="#">Home</a></li>
-  <li><a href="#">Library</a></li>
-  <li class="active">Data</li>
+  <li><a href="#">Acceuil</a></li>
+  
 </ol>
 <!--/Breadcrumbs-->
 <!-- pabel content -->
@@ -102,9 +98,9 @@
     </div>
   </div>
   
-<%= submit_tag "Create" %>
+<%= submit_tag "recherche" %>
 <% end -%>
-<%= link_to 'Back', {:action => 'index'} %>
+
 </div>
 </div>
   </div>

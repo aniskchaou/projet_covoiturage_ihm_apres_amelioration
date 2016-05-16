@@ -1,4 +1,18 @@
 
+
+<% session[:current_user_id].each do |m| %>
+<% @va=  m["id"]       %>
+
+<% end %>
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html><head>
 <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
@@ -29,16 +43,7 @@
 			</div>
 		</nav>
 
-		<nav>
-			<a href="#">Home</a>
-			<a href="#" class="selected">Blog</a>
-			<a href="#">Pricing</a>
-		</nav>
-
-		<ul>
-			<li><a href="#">Login</a></li>
-			<li><a href="#">Sign up</a></li>
-		</ul>
+		
 
 	</div>
 
@@ -48,15 +53,14 @@
 <!-- Menu pricipal -->
 <ul class="nav nav-tabs">
   <li role="presentation" class="active"><a href="#">Home</a></li>
-  <li role="presentation"><a href="#">Profile</a></li>
-  <li role="presentation"><a href="#">Messages</a></li>
+
 </ul>
 <!-- Menu pricipal -->
 <!--Breadcrumbs-->
 <ol class="breadcrumb">
-  <li><a href="#">Home</a></li>
-  <li><a href="#">Library</a></li>
-  <li class="active">Data</li>
+  <li><a href="#">Acceuil</a></li>
+  <li><a href="#">Trajet</a></li>
+  <li class="active">Voir</li>
 </ol>
 <!--/Breadcrumbs-->
 <!--2row 2/3 et 1/3 -->

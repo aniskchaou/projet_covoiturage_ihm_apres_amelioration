@@ -10,7 +10,7 @@ class VoituresController < ApplicationController
   def create
     @voiture = Voiture.new(voitures_params)
     if @voiture.save
-      redirect_to :action => 'index'
+      redirect_to :controller=>'trajets' ,:action => 'new'
 
     end
 

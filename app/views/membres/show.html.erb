@@ -1,8 +1,114 @@
-<h1>voir membre</h1>
-<p>nom :<%= @membre.nom %></p>
-<p>prenom<%= @membre.prenom %></p>
-<p>age :<%= @membre.age %></p>
-<p>email :<%= @membre.email %></p>
 
 <hr />
+
+
+<% session[:current_user_id].each do |m| %>
+<% @va=  m["id"]  %>
+<%= m["id"]  %>
+<% end %>
 <%= link_to 'Back', {:action => 'index'} %>
+
+<a href="/membres/<%= @va%>">qs</a>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+<title>index</title></head>
+
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="asset_path('bootstrap.min.css')" media="screen, projection">
+<link rel="stylesheet" type="text/css" href="asset_path('bootstrap.css')" media="screen, projection">
+<link rel="stylesheet" type="text/css" href="asset_path('bootstrap-theme.css')" media="screen, projection">
+<link rel="stylesheet" type="text/css" href="asset_path('bootstrap-theme.min.css')" media="screen, projection">
+<link rel="stylesheet" type="text/css" href="asset_path('bootstraapt.css')" media="screen, projection">
+<link rel="stylesheet" type="text/css" href="asset_path('footer-basic-centered.css')" media="screen, projection">
+<!-- /css -->
+
+<!-- js -->
+<script type="text/javascript" src="asset_path('bootstrap.js')"></script>
+<script type="text/javascript" src="asset_path('npm.js')"></script>
+<script type="text/javascript" src="asset_path('bootstrap.min.js')"></script>
+<!-- /js -->
+
+<header class="header-login-signup">
+
+	<div class="header-limiter">
+
+		<nav class="bootstraapt">
+			<div class="navbar-header">
+
+				<%= image_tag  'logo1.png' ,'height':134 ,'width':154 %>
+			</div>
+		</nav>
+
+		<nav>
+			<a href="#">Home</a>
+			<a href="#" class="selected">Blog</a>
+			<a href="#">Pricing</a>
+		</nav>
+
+		<ul>
+			<li><a href="#">Login</a></li>
+			<li><a href="#">Sign up</a></li>
+		</ul>
+
+	</div>
+
+</header>
+
+<body style="padding-left: 115px;padding-right: 115px;">
+	<!-- Menu pricipal -->
+	<ul class="nav nav-tabs">
+		<li role="presentation" class="active"><a href="#">Home</a></li>
+		<li role="presentation"><a href="#">Profile</a></li>
+		<li role="presentation"><a href="#">Messages</a></li>
+	</ul>
+	<!-- Menu pricipal -->
+	<!--Breadcrumbs-->
+	<ol class="breadcrumb">
+		<li><a href="#">Home</a></li>
+		<li><a href="#">Library</a></li>
+		<li class="active">Data</li>
+	</ol>
+	<!--/Breadcrumbs-->
+	<!-- pabel content -->
+	<div class="panel panel-default">
+		<div class="panel-heading"><h3>voir profile</h3></div>
+		<div class="panel-body" >
+			<!--img src="../logo.png" class="img-responsive img-rounded" alt="Responsive image" style="width: 100%;height: 369px;"-->
+			<div class="jumbotron" align="center">
+		       <p>nom :<%= @membre.nom %></p>
+                <p>prenom<%= @membre.prenom %></p>
+                <p>age :<%= @membre.age %> ans</p>
+                <p>email :<%= @membre.email %></p>
+
+
+			</div>
+               
+				
+
+				</div>
+			</div>
+
+
+		</div>
+		<!-- pabel content -->
+
+
+
+
+	</body>
+	<footer class="footer-basic-centered">
+
+		<p class="footer-company-motto">Covoiturage</p>
+
+		<p class="footer-links">
+			<a href="#">inscrption</a>
+			·
+			<a href="#">Blog</a>
+		</p>
+
+		<p class="footer-company-name">Company Name &copy; 2016</p>
+
+	</footer></html>
+
