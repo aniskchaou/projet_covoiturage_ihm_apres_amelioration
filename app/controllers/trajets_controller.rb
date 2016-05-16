@@ -1,6 +1,7 @@
 class TrajetsController < ApplicationController
   def index
     @trajets=Trajet.all
+    @reservations=Reservation.all
   end
 
   def new
@@ -48,18 +49,33 @@ def delete
 end
 
 def trajets_params
-  params.require(:trajets).permit(:id_conducteur, :id_voiture, :id_ville_source, :id_ville_destination)
+  params.require(:trajets).permit(:id_conducteur, :id_voiture, :id_ville_source, :id_ville_destination,:date,:nbr_place,:prix)
+end
+
+def reservations_params
+  params.require(:trajets).permit(:id_membre, :id_trajet, :place_res)
 end
 
 def search
   @villes=Ville.all
 
 end
-
+def reservation
+  @reservation = Reservation.new(reservations_params)
+  if @reservation.save
+    redirect_to :action => 'index'
+  end
+end  
 def recherche
- 
+
   if params[:trajets]
     @trajets = Trajet.search(params[:trajets][:search1],params[:trajets][:search2]).all
+    @voitures=Voiture.all
+    @avis=Avi.all
+    @villes=Ville.all
+    @conducteurs=Conducteur.all
+    @membres=Membre.all
+
   else
     @trajets = Trajet.all.order('created_at DESC')
   end

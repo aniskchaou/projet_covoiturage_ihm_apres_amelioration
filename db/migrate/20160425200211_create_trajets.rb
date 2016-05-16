@@ -7,7 +7,8 @@ class CreateTrajets < ActiveRecord::Migration
       t.text :id_ville_source
       t.text :id_ville_destination
       t.text :date
-
+      t.integer :prix
+      t.integer :nbr_place
       t.timestamps null: false
     end
   end

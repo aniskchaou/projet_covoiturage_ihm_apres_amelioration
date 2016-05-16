@@ -6,7 +6,22 @@ class MembresController < ApplicationController
   def new
     @membres = Membre.new()
   end
-  
+  def connexion
+
+
+  end  
+  def login
+    if params[:membres]
+     @membres = Membre.search(params[:membres][:email],params[:membres][:mdp]).all
+      if @membres.blank?
+        redirect_to  :action => 'connexion'
+      else
+        session[:current_user_id] = @membres
+        redirect_to :controller=>'trajets' ,:action => 'search'
+      end
+
+    end
+  end  
 
   def create
     @membre = Membre.new(membre_params)

@@ -1,8 +1,227 @@
-<h1>voir trajet</h1>
-<p>ville source :<%= @ville_source.nom_ville %></p>
-<p>ville destination <%= @ville_destiantion.nom_ville %></p>
-<p>voiture :<%= @voiture.marque %></p>
-<p>conducteur :<%= @conducteur.nom %></p>
 
-<hr />
-<%= link_to 'Back', {:action => 'index'} %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+<title>Détail Trajet</title></head>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css" media="screen, projection">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" media="screen, projection">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css" media="screen, projection">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" media="screen, projection">
+	<link rel="stylesheet" type="text/css" href="css/bootstraapt.css" media="screen, projection">
+	<link rel="stylesheet" type="text/css" href="css/footer-basic-centered.css" media="screen, projection">
+<!-- /css -->
+
+<!-- js -->
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/npm.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<!-- /js -->
+
+<header class="header-login-signup">
+
+	<div class="header-limiter">
+
+		<nav class="bootstraapt">
+			<div class="navbar-header">
+			
+		          <%= image_tag  'logo1.png' ,'height':134 ,'width':154 %>
+			</div>
+		</nav>
+
+		<nav>
+			<a href="#">Home</a>
+			<a href="#" class="selected">Blog</a>
+			<a href="#">Pricing</a>
+		</nav>
+
+		<ul>
+			<li><a href="#">Login</a></li>
+			<li><a href="#">Sign up</a></li>
+		</ul>
+
+	</div>
+
+</header>
+<body style="padding-left: 115px;padding-right: 115px;">
+
+<!-- Menu pricipal -->
+<ul class="nav nav-tabs">
+  <li role="presentation" class="active"><a href="#">Home</a></li>
+  <li role="presentation"><a href="#">Profile</a></li>
+  <li role="presentation"><a href="#">Messages</a></li>
+</ul>
+<!-- Menu pricipal -->
+<!--Breadcrumbs-->
+<ol class="breadcrumb">
+  <li><a href="#">Home</a></li>
+  <li><a href="#">Library</a></li>
+  <li class="active">Data</li>
+</ol>
+<!--/Breadcrumbs-->
+<!--2row 2/3 et 1/3 -->
+<div class="row">
+  <div class="col-xs-12 col-md-8">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<table width="100%" border="0" cellspacing="1" cellpadding="2">
+ 				 <tr>
+ 				   <td><%= @ville_source.nom_ville %></td>
+ 				   <td>
+
+ 				   <%= image_tag  '1461614925_arrow-right.png' ,'height':32 ,'width':32 %>
+
+ 				</td>
+ 				   <td><%= @ville_destiantion.nom_ville %></td>
+ 				   <td>
+
+ 				   
+                    <%= image_tag  'autoroute.png' ,'height':32 ,'width':32 %>
+
+ 				   </td>
+ 				   <td><a href="#" data-toggle="modal" data-origin="Voir le trajet" data-alt="Masquer la carte" data-position="global">Voir le trajet</a></td>
+		        </tr>
+				</table>
+		</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-4">Départ :</div>
+				<div class="col-md-4" style="padding-left: 167px;margin-left: -189px;">
+					
+                    <%= image_tag  'start.png' ,'height':32 ,'width':32 %>
+
+				</div>
+				<div class="col-md-4"><%= @ville_source.nom_ville %></div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">Arriv&eacute;e :</div>
+				<div class="col-md-4" style="padding-left: 167px;margin-left: -189px;">
+				
+                      <%= image_tag  'finish.png' ,'height':32 ,'width':32 %>
+				</div>
+				<div class="col-md-4"><%= @ville_destiantion.nom_ville %></div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">Date d&eacute;part :</div>
+				<div class="col-md-4" style="padding-left: 167px;margin-left: -189px;">
+
+					
+                    <%= image_tag  'calendar.png' ,'height':32 ,'width':32 %>
+
+				</div>
+				<div class="col-md-4"><strong><%= @trajet.date %></strong></div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">D&eacute;tail :</div>
+				<div class="col-md-4" style="padding-left: 167px;margin-left: -189px;">
+					
+					
+                    <%= image_tag  '1461614105_info.png' ,'height':32 ,'width':32 %>
+
+				</div>
+				<div class="col-md-4">D&eacute;part pile &agrave; l'heure</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">.</div>
+				<div class="col-md-4" style="padding-left: 167px;margin-left: -189px;">
+
+					
+                    <%= image_tag  '1461614228_Travel.png' ,'height':32 ,'width':32 %>
+
+				</div>
+				<div class="col-md-4">Moyens</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+				
+                     <%= image_tag  'driver-female-36.png' ,'height':32 ,'width':32 %>
+
+				</div>
+				<div class="col-md-8" style="padding-left: 167px;margin-left: -189px;"><%= @conducteur.nom %></div>
+				<div class="col-md-8" style="padding-left: 167px;margin-left: -189px;">voiture :<%= @voiture.marque %></div>
+				
+			</div>
+		   
+		</div>
+	</div>
+  </div>
+  <div class="col-xs-6 col-md-4">
+	<div class="panel panel-default">
+		<div class="panel-body" style="margin-top: -16px;margin-left: -1px;">
+			<div class="row">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								
+                                <%= image_tag  '1461616196_Purse.png' ,'height':60 ,'width':60 %>
+
+							</div>
+							<div class="panel-body"><p><strong><%= @trajet.prix %> Dinar par place</strong></p></div>
+						</div>
+					
+					</div>
+					<div class="col-md-6">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								
+                               <%= image_tag  '1461616307_service_-40.png' ,'height':60 ,'width':60 %>
+
+							</div>
+							<div class="panel-body"><p><strong><%= @trajet.nbr_place %> place disponible</strong></p></div>
+						</div>
+					
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="panel panel-default">
+							<div class="panel-heading">
+								
+
+                                 <%= form_tag :action => 'reservation' do %>
+
+                                  <select name="trajets[place_res]" class="form-control">
+								<option value="1">1 place</option>
+								<option value="2">2 place</option>
+								</select>
+
+
+                          <input type="hidden" name="trajets[id_trajet]" value="<%= @trajet.id %>" >
+
+
+
+                            <input type="hidden" name="trajets[id_membre]" value="<%= @va %>" >
+
+
+
+                                
+                             
+							</div>
+							<div class="panel-body">
+								<input type="submit" class="btn btn-success" style="width: 100%;" value="Réserver"/>
+							 <% end %>	
+							</div>
+						</div>
+				</div>
+			</div>
+		</div>
+	</div>
+  </div>
+</div>
+<!--/2row 2/3 et 1/3 -->
+
+</body>
+<footer class="footer-basic-centered">
+
+			<p class="footer-company-motto">Covoiturage</p>
+
+			<p class="footer-links">
+				<a href="#">inscrption</a>
+				·
+				<a href="#">Blog</a>
+			</p>
+
+			<p class="footer-company-name">Company Name &copy; 2016</p>
+
+</footer></html>
+</html>

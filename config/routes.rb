@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
   
+  post 'trajets/reservation'
+  get '/membres/connexion'
+
+  post '/membres/login'
+
   get '/trajets/search'
 
   post '/trajets/recherche'

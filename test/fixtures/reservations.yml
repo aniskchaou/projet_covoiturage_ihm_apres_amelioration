@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id_membre: 1
+  place_res: 1
+  id_trajet: 1
+  commentaire: MyString
+
+two:
+  id_membre: 1
+  place_res: 1
+  id_trajet: 1
+  commentaire: MyString

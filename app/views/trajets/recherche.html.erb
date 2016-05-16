@@ -1,16 +1,230 @@
-<h1>liste trajets</h1>
+
+
+
+
+
+
+
+
+<%= link_to 'ajouter trajet', {:action => 'new'} %>
+
+
+
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+<title>Recherche Trajet</title></head>
+
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css" media="screen, projection">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" media="screen, projection">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css" media="screen, projection">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" media="screen, projection">
+	<link rel="stylesheet" type="text/css" href="css/bootstraapt.css" media="screen, projection">
+	<link rel="stylesheet" type="text/css" href="css/footer-basic-centered.css" media="screen, projection">
+<!-- /css -->
+
+<!-- js -->
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/npm.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<!-- /js -->
+	
+<header class="header-login-signup">
+
+	<div class="header-limiter">
+
+		<nav class="bootstraapt">
+			<div class="navbar-header">
+			<%= image_tag  'logo1.png' ,'height':134 ,'width':154 %>
+			</div>
+		</nav>
+
+		<nav>
+			<a href="#">Home</a>
+			<a href="#" class="selected">Blog</a>
+			<a href="#">Pricing</a>
+		</nav>
+
+		<ul>
+			<li><a href="#">Login</a></li>
+			<li><a href="#">Sign up</a></li>
+		</ul>
+
+	</div>
+
+</header>
+
+<body style="padding-left: 115px;padding-right: 115px;">
+<!-- Menu pricipal -->
+<ul class="nav nav-tabs">
+  <li role="presentation" class="active"><a href="#">Home</a></li>
+  <li role="presentation"><a href="#">Profile</a></li>
+  <li role="presentation"><a href="#">Messages</a></li>
+</ul>
+<!-- Menu pricipal -->
+<!--Breadcrumbs-->
+<ol class="breadcrumb">
+  <li><a href="#">Home</a></li>
+  <li><a href="#">Library</a></li>
+  <li class="active">Data</li>
+</ol>
+<!--/Breadcrumbs-->
+<!-- pabel content -->
+
+<!-- pabel content -->
+<div class="panel panel-default">
+<div class="panel-body">
 <% if @trajets.blank? %>
 <p>Il n'y a pas de trajet actuellement dans le système.</p>
 <% else %>
 
-<ul id = "trajets">
-	<% @trajets.each do |c| %>
-	<li><%= link_to c.id_ville_source , {:action => 'show', :id => c.id} %></li>
-   <%= link_to 'Edit', {:action => 'edit',:id => c.id} %>
-   <%= link_to 'delete', {:action => 'delete',:id => c.id},:confirm => "Are you sure you want to delete" %>
 
-    <% end %>	
+
+		<% @trajets.each do |c| %>
+       
+
+         
+           <div class="row">
+  <div class="col-xs-6 col-sm-4">
+ <div class="btn-group btn-group-justified" role="group" aria-label="...">
+
+			<div class="btn-group" role="group" style="padding-left: 106px;">
+			
+				<img src="image/Conducteur-homme.jpg" alt="..." class="img-circle">
+	            <%= image_tag  'Conducteur-homme.jpg' %>
+			</div>
+		
+			<div class="btn-group" role="group" >
+			  <% @conducteurs.each do |o| %>
+	           
+			           <% if c.id_conducteur==o.idMembre %>
+			           
+				             <% @membres.each do |m| %>
+
+					                 <% if m.id==o.idMembre%>
+                                         
+                                         <h4><span class="label label-primary"><%= m.nom %> <%= m.prenom %></span></h4>
+				<h4><span class="label label-info"><%= m.age %> ans</span></h4>
+					                    
+					                    
+					                    
+					                 <%end %>
+			                 <% end %>
+			           <% end %>
+
+	           <% end %>
+				
+				
+			</div>
+	
+		</div>
+		<div style="padding-left: 140px;">
+		<h4><span class="label label-default" > <% @voitures.each do |q| %>
+				<%  if c.id_voiture==q.id %>
+
+				<%= q.marque %>
+                   <%= q.nb_place %>
+				<% end %>
+			<% end %>	 Place disponibles </span></h4>
+		</div>
  
+  </div>
+  <div class="col-xs-6 col-sm-4">
+  <h3><span class="label label-success"> Vendredi 28 avril 2016   7:40 </span></h3>
+  
+  <p><span class="glyphicon glyphicon-export" aria-hidden="true" title="départ"><strong>   
+  	<% @villes.each do |vi| %>
+
+				<%  if c.id_ville_source.to_f == vi.id %>
+
+				
+                   <%= vi.nom_ville %>
+				<% end %>
+			<% end %>	
+
+  </span></p>
+  <p><span class="glyphicon glyphicon-import" aria-hidden="true" title="Arrivée"><strong> 
+  	           <% @villes.each do |ve| %>
+				<%  if c.id_ville_destination.to_f==ve.id %>
+
+				
+                   <%= ve.nom_ville %>
+				<% end %>
+			<% end %>
+  </span></p>
+  </div>
+  
+  
+  <div class="col-xs-6 col-xs-offset-3 col-sm-4 col-sm-offset-0">
+  
+  <blockquote>
+  <p><span class="label label-danger">15 DT</span></p>
+  <footer><span class="label label-warning">par place</span></footer>
+  <strong><a href ="#">  </a><%= link_to 'lire l anonce', {:action => 'show', :id => c.id} -%></strong>
+</blockquote>
+  
+  
+  </div>
+</div>
+<hr style="width: 74%;">
+
+
+        
+           
+           
+       
+
+		   
+
+			
+	           
+	<% end %>
+        
 <% end %>
-</ul>	
-  <%= link_to 'ajouter trajet', {:action => 'new'} %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+<!-- /pabel content -->
+
+
+</body>
+<footer class="footer-basic-centered">
+
+			<p class="footer-company-motto">Covoiturage</p>
+
+			<p class="footer-links">
+				<a href="#">inscrption</a>
+				·
+				<a href="#">Blog</a>
+			</p>
+
+			<p class="footer-company-name">Company Name &copy; 2016</p>
+
+		</footer></html>
