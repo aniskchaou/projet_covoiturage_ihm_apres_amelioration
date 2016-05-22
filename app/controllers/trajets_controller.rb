@@ -2,6 +2,7 @@ class TrajetsController < ApplicationController
   def index
     @trajets=Trajet.all
     @reservations=Reservation.all
+    @villes=Ville.all
   end
 
   def new
@@ -13,6 +14,7 @@ class TrajetsController < ApplicationController
 
   def create
    @trajet = Trajet.new(trajets_params)
+    flash[:msg] = "trajet est ajouté avec succés"
    if @trajet.save
     redirect_to :action => 'index'
 
@@ -26,7 +28,9 @@ def show
   @ville_destiantion=Ville.find(@trajet.id_ville_destination)
   @voiture=Voiture.find(@trajet.id_voiture)
   @conducteur=Membre.find(@trajet.id_conducteur)
-
+  @reservations=Reservation.all
+  @membres=Membre.all
+  
 end
 
 def edit
@@ -39,12 +43,14 @@ end
 def update
   @trajet = Trajet.find(params[:id])
   if @trajet.update_attributes(trajets_params)
+    flash[:msg] = "trajet est modifié avec succés"
     redirect_to :action => 'show', :id => @trajet
   end
 end
 
 def delete
   Trajet.find(params[:id]).destroy
+  flash[:msg] = "trajet est supprimé avec succés"
   redirect_to :action => 'index'
 end
 
@@ -62,7 +68,11 @@ def search
 end
 def reservation
   @reservation = Reservation.new(reservations_params)
+  @trajets=Trajet.find(params[:trajets][:id_trajet])
+  @nbr_place=@trajets.nbr_place-params[:trajets][:place_res].to_f
+  Trajet.update(@trajets.id,:nbr_place=>@nbr_place)
   if @reservation.save
+    flash[:msg] = "reservation est effectué avec succés"
     redirect_to :action => 'index'
   end
 end  
@@ -82,7 +92,21 @@ def recherche
 
 end
 
+def list_reservation
+  @reservations=Reservation.all
+  @membres=Membre.all
+end
 
+def delete_reservation
+   @reservation=Reservation.find(params[:id])
+   @trajet=Trajet.find(@reservation.id_trajet)
+  @nbr_place=@trajet.nbr_place+@reservation.place_res.to_f
+  Trajet.update(@trajet.id,:nbr_place=>@nbr_place)
+
+   Reservation.find(params[:id]).destroy
+  flash[:msg] = "reservation est annulé avec succés"
+  redirect_to :action => 'list_reservation'
+end
 
 
 

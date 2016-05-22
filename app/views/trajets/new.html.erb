@@ -1,26 +1,24 @@
-
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html><head>
 <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
-<title>index</title></head>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<title>Proposer Trajet </title></head>
+<!-- css -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<!-- /css -->
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<!-- css -->
-<link rel="stylesheet" type="text/css" href="asset_path('bootstrap.min.css')" media="screen, projection">
-<link rel="stylesheet" type="text/css" href="asset_path('bootstrap.css')" media="screen, projection">
-<link rel="stylesheet" type="text/css" href="asset_path('bootstrap-theme.css')" media="screen, projection">
-<link rel="stylesheet" type="text/css" href="asset_path('bootstrap-theme.min.css')" media="screen, projection">
-<link rel="stylesheet" type="text/css" href="asset_path('bootstraapt.css')" media="screen, projection">
-<link rel="stylesheet" type="text/css" href="asset_path('footer-basic-centered.css')" media="screen, projection">
-<!-- /css -->
-
 <!-- js -->
-<script type="text/javascript" src="asset_path('bootstrap.js')"></script>
-<script type="text/javascript" src="asset_path('npm.js')"></script>
-<script type="text/javascript" src="asset_path('bootstrap.min.js')"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/npm.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
 <!-- /js -->
 
 <header class="header-login-signup">
@@ -33,7 +31,23 @@
 				<%= image_tag  'logo1.png' ,'height':134 ,'width':154 %>
 			</div>
 		</nav>
+          <ul>
+         <% if session[:current_user_id] %>
+        <% session[:current_user_id].each do |m| %>
+         <% @va=  m["id"]     %>
+         <%    @nom= m["nom"]    %>
+         <%    @prenom= m["prenom"]  %>
+         <% end %>
+		
+      
+        <li><span class="label label-success" >Bienvenue ! <%= @nom+' '+@prenom    %></span></li>
+      <% else %>
+     
+        <li><a href="/membres/connexion">Login</a></li>
+      <li><a href="/membres/new">Inscription</a></li>
 
+      <% end %>
+		</ul>
 		
 
 		
@@ -42,96 +56,168 @@
 
 </header>
 
-<body style="padding-left: 115px;padding-right: 115px;">
-	<!-- Menu pricipal -->
-	<ul class="nav nav-tabs">
-		<li role="presentation" class="active"><a href="#">Home</a></li>
-		<li role="presentation"><a href="#">Profile</a></li>
-		
-	</ul>
-	<!-- Menu pricipal -->
-	<!--Breadcrumbs-->
-	<ol class="breadcrumb">
-		<li><a href="#">Acceuil</a></li>
+<body style="padding-left: 115px;padding-right: 115px;" onload="initialize()">
+<!-- Menu pricipal -->
+<ul class="nav nav-tabs">
+  <li role="presentation" class="active"><a href="#">Home</a></li>
+
+		   <% if session[:current_user_id] %>
+<% session[:current_user_id].each do |m| %>
+<% @va=  m["id"]       %>
+
+<% end %>
+  <li role="presentation"><a href="/membres/<%=@va%>/">Mon Profile</a></li>
+  <li role="presentation"><a href="/trajets/new">Ajouter un trajet</a></li>
+    <li role="presentation"><a href="/trajets/list_reservation">Mes Reservations</a></li>
+  <li role="presentation"><a href="/trajets/">Mes trajets</a></li>
+  <li role="presentation"><a href="/membres/logout">Deconnexion</a></li>
+<% else %>
+  <li role="presentation"><a href="/membres/connexion">Connexion</a></li>
+  <li role="presentation"><a href="/membres/new">Inscription</a></li>
+
+<% end %>
+</ul>
+<!-- Menu pricipal -->
+<!--Breadcrumbs-->
+<ol class="breadcrumb">
+ <li><a href="#">Acceuil</a></li>
 		<li><a href="#">Trajet</a></li>
 		<li class="active">Ajouter</li>
-	</ol>
-	<!--/Breadcrumbs-->
-	<!-- pabel content -->
-	<div class="panel panel-default">
-		<div class="panel-heading"><h3>Ajouter Trajet</h3></div>
-		<div class="panel-body" >
-			<!--img src="../logo.png" class="img-responsive img-rounded" alt="Responsive image" style="width: 100%;height: 369px;"-->
-			<div class="jumbotron" align="center">
-				<%= form_tag :action => 'create' do %>
+</ol>
+<!--/Breadcrumbs-->
+<!-- pabel content -->
+<div class="row">
+  <div class="col-md-8">
+    <div class="thumbnail">
+	<!-- voiture -->
+		<%= form_tag :action => 'create' do %>
+		<% session[:current_user_id].each do |m| %>
+              <% @va=  m["id"]       %>
+              <% end %>
+		<input type="hidden" value="<%= @va %>" name="trajets[id_conducteur]"%>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Voiture</h3>
+			</div>
+			<div class="panel-footer">
+				<div class="form-horizontal">
+				
+					<div class="form-group">
 
-
-
-
-				<div class="form-group">
-					<label for = "conducteur">Conducteur</label>
-					<%= collection_select(:trajets, :id_conducteur, @membres, :id, :nom, prompt: true)
+						<label for="inputEmail3" class="col-sm-3 control-label">Voiture</label>
+						<div class="col-sm-6">
+							<div class="input-group">
+								<div class="input-group-addon"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></div>
+								<%= collection_select(:trajets, :id_voiture, @voitures, :id, :marque, {:prompt=>true} ,{:class=>'form-control'})
 					%>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<a  href="/voitures/new"type="button" class="btn btn-info">Ajouter voiture</a>
+						</div>
+					</div>
+					<div class="form-group">
+					<label for="inputEmail3" class="col-sm-3 control-label">Prix par place :</label>
+						<div class="col-sm-6">
+						  <div class="input-group">
+							<div class="input-group-addon"><span class="glyphicon glyphicon-euro" aria-hidden="true"></span></div>
+							<%= text_field 'trajets', 'prix' ,class:'form-control' %> 
+
+
+						  </div>
+						</div>
+						<div class="col-sm-3">
+						<h4><span class="label label-danger">Dinar</span></h4>
+						</div>
+					</div>
+					<div class="form-group">
+					<label for="inputEmail3" class="col-sm-3 control-label">Palce disponible :</label>
+						<div class="col-sm-6">
+						  <div class="input-group">
+							<div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></div>
+								<%= text_field 'trajets', 'nbr_place' ,class:'form-control' %>
+
+
+						  </div>
+						</div>
+						<div class="col-sm-3">
+						<h4><span class="label label-warning">Place</span></h4>
+						</div>
+					</div>
+				
 				</div>
-
-
-
-				<div class="form-group">
-					<label for = "voiture">Voiture</label>:
-					<%= collection_select(:trajets, :id_voiture, @voitures, :id, :marque, prompt: true)
+			</div>
+		</div>
+		<!-- /voiture -->
+		<!-- ville voiyage -->
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Itinéraire</h3>
+			</div>
+			<div class="panel-footer">
+				<div class="form-horizontal">
+					<div class="form-group">
+						<label for="inputEmail3" class="col-sm-3 control-label">Point de départ :</label>
+						<div class="col-sm-9">
+							<div class="input-group">
+								<div class="input-group-addon"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></div>
+							<%= collection_select(:trajets, :id_ville_source, @villes, :id, :nom_ville,  {:prompt=>true} ,{:class=>'form-control'})
 					%>
-					<a href="/voitures/new">ajouter voiture</a>
-				</div>
-
-
-				<div class="form-group">
-					<label for = "ville_source">Ville source</label>:
-					<%= collection_select(:trajets, :id_ville_source, @villes, :id, :nom_ville, prompt: true)
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputPassword3" class="col-sm-3 control-label">Point d'arrivée :</label>
+						<div class="col-sm-9">
+							<div class="input-group">
+								<div class="input-group-addon"><span class="glyphicon glyphicon-road" aria-hidden="true"></span></div>
+						<%= collection_select(:trajets, :id_ville_destination, @villes, :id, :nom_ville,  {:prompt=>true} ,{:class=>'form-control'})
 					%>
+							</div>	
+						</div>
+					</div>
 				</div>
-
-
-
-
-				<div class="form-group">
-					<label for = "ville_destination">Ville destination</label>
-					<%= collection_select(:trajets, :id_ville_destination, @villes, :id, :nom_ville, prompt: true)
-					%>
-				</div>
-               
-				<div class="form-group">
-					<label for = "book_description">date</label>
-					<%= text_field 'trajets', 'date' ,class:'form-control' %><br>
-				</div>
-                     <script type="text/javascript">
-                $(function() {
+			</div>
+		</div>
+		<!-- /ville voiyage -->
+		<!-- time voiyage -->
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Date et Horaire</h3>
+			</div>
+			<div class="panel-footer">
+				<div class="form-horizontal">
+					<div class="form-group">
+						<label for="inputEmail3" class="col-sm-2 control-label">Aller :</label>
+						<div class="col-sm-6">
+						<%= text_field 'trajets', 'date' ,class:'form-control' %>
+						</div>
+						           <script type="text/javascript">
+                                $(function() {
 									$( "#trajets_date" ).datepicker();
 								});
 								</script>
 
-				<div class="form-group">
-					<label for = "book_description">nombre de place</label>
-					<%= text_field 'trajets', 'nbr_place' ,class:'form-control' %>
+						<label for="inputEmail3" class="col-sm-1 control-label">heure:</label>
+						<div class="col-sm-3">
+						<input type="time" name="heure" class="form-control" max="24" min="00">
+						</div>
+					</div>
 				</div>
-
-				<div class="form-group">
-					<label for = "book_description">prix</label>
-					<%= text_field 'trajets', 'prix' ,class:'form-control' %>     
-				</div>
-
-				<%= submit_tag "Create" %>
-				<% end -%>
-				<%= link_to 'Back', {:action => 'index'} %>
-
-
-
 			</div>
-
-
 		</div>
-	</div>
-
-
+		<!-- /time voiyage -->
+		
+       <span style=" margin-left: 590px;margin-top: -15px;"><%= submit_tag "Ajouter",:class=>'btn btn-success' %></span>
+    	
+				<% end -%>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="thumbnail">
+      <div id="map_canvas"></div>
+    </div>
+  </div>
 </div>
 <!-- pabel content -->
 
@@ -139,16 +225,167 @@
 
 
 </body>
+<style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #map_canvas {
+            height: 400px;
+            width: 300px;
+            margin:25px auto;
+        } 
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script> 
+    var myLatLng,marker,myLatLng2,marker2,map,mapOptions,styledMapType;
+   var tableau=new Array();
+    
+    tableau[0]=new Array();
+    tableau[0][0]=34.432551;
+    tableau[0][1]=8.775376;
+    tableau[0][2]=12;
+
+    tableau[1]=new Array();
+    tableau[1][0]=37.277137;
+    tableau[1][1]=9.858908;
+    tableau[1][2]=11;
+    
+    tableau[1]=new Array();
+    tableau[1][0]=36.808333;
+    tableau[1][1]=10.177607;
+    tableau[1][2]=9;
+
+    function getposition(val) {
+    	for(var i=0; i<tableau.length; i++)
+    	 {   if(tableau[i][2]==val)
+	    			{
+	    				return i;
+	    			}
+    		  
+    	}
+    }
+    $('#trajets_id_ville_source').change(function() {
+    	
+    	var i=getposition($('#trajets_id_ville_source').val());
+    	set_cordinate1(tableau[i][0],tableau[i][1]);
+    	call_map();
+    	
+    });
+     $('#trajets_id_ville_destination').change(function() {
+    	var j=getposition($('#trajets_id_ville_destination').val());
+    	
+    	set_cordinate2(tableau[j][0],tableau[j][1]);
+    	call_map();
+    });
+     function set_cordinate1 (v1_x,v1_y) {
+     	 myLatLng = new google.maps.LatLng(v1_x, v1_y);
+         marker = new google.maps.Marker({
+            position: myLatLng,
+            map: map,
+            title: 'Sfax'
+        });
+     }
+    
+    function set_cordinate2 (v2_x,v2_y) {
+    	 myLatLng2 = new google.maps.LatLng(v2_x, v2_y);
+        marker2 = new google.maps.Marker({
+            position: myLatLng2,
+            map: map,
+            title: 'Tunis'
+        });
+    }
+
+    function call_map () {
+    	 var directionsService = new google.maps.DirectionsService();
+        var directionsDisplay = new google.maps.DirectionsRenderer({ 'map': map });
+        var request = {
+            origin : myLatLng,
+            destination: myLatLng2,
+            travelMode : google.maps.DirectionsTravelMode.DRIVING,
+            unitSystem: google.maps.DirectionsUnitSystem.METRIC
+        };
+
+        directionsService.route(request, function(response, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(response);
+                directionsDisplay.suppressMarkers = true;
+                directionsDisplay.setOptions({polylineOptions:{strokeColor: '#008000'}, preserveViewport: true});
+            }
+        });
+    }
+
+    function initialize() {
+        var styles = {
+            'monTheme': [
+            {
+                featureType: 'road',
+                elementType: 'geometry',
+                stylers: [{'visibility': 'simplified'}]
+            }, {
+                featureType: 'road.arterial',
+                stylers: [
+                    {hue: 149},
+                    {saturation: -78},
+                    {lightness: 0}
+                ]
+            }, {
+                featureType: 'road.highway',
+                stylers: [
+                    {hue: -31},
+                    {saturation: -40},
+                    {lightness: 2.8}
+                ]
+            }, {
+                featureType: 'poi',
+                elementType: 'label',
+                stylers: [{'visibility': 'off'}]
+            }, {
+                featureType: 'landscape',
+                stylers: [
+                    {hue: 163},
+                    {saturation: -26},
+                    {lightness: -1.1}
+                ]
+            }, {
+                featureType: 'transit',
+                stylers: [{'visibility': 'off'}]
+            }, {
+                featureType: 'water',
+                stylers: [
+                    {hue: 3},
+                    {saturation: -24.24},
+                    {lightness: -38.57}
+                ]
+            }
+        ]}; 
+
+         mapOptions = {
+            zoom: 6,
+            center: new google.maps.LatLng(34,9),
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            disableDefaultUI: true,
+            mapTypeId: 'monTheme'
+        }
+         map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+         styledMapType = new google.maps.StyledMapType(styles['monTheme'], {name: 'monTheme'});
+        map.mapTypes.set('monTheme', styledMapType);
+
+     
+ 
+    }
+    </script>
 <footer class="footer-basic-centered">
 
-	<p class="footer-company-motto">Covoiturage</p>
+			<p class="footer-company-motto">Covoiturage</p>
 
-	<p class="footer-links">
-		<a href="#">inscrption</a>
-		·
-		<a href="#">Blog</a>
-	</p>
+			<p class="footer-links">
+				<a href="#">inscrption</a>
+				·
+				<a href="#">Blog</a>
+			</p>
 
-	<p class="footer-company-name">Company Name &copy; 2016</p>
+			<p class="footer-company-name">Company Name &copy; 2016</p>
 
 </footer></html>

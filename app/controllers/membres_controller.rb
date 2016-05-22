@@ -17,6 +17,7 @@ class MembresController < ApplicationController
         redirect_to  :action => 'connexion'
       else
         session[:current_user_id] = @membres
+        flash[:msg] = "bienvenue sur notre site "
         redirect_to :controller=>'trajets' ,:action => 'search'
       end
 
@@ -25,8 +26,12 @@ class MembresController < ApplicationController
 
   def create
     @membre = Membre.new(membre_params)
+      
     if @membre.save
-      redirect_to :action => 'index'
+      @mem = Membre.search(params[:membres][:email],params[:membres][:mdp]).all
+      session[:current_user_id] = @mem
+      flash[:msg] = "bienvenue sur notre site"
+      redirect_to :controller=>'trajets',:action => 'search'
     end
   end
 
@@ -42,12 +47,14 @@ class MembresController < ApplicationController
   def update
     @membre = Membre.find(params[:id])
     if @membre.update_attributes(membres_param)
+      flash[:msg] = "informations est modifié avec succés"
       redirect_to :action => 'show', :id => @membre
     end
   end
 
   def delete
       Membre.find(params[:id]).destroy
+      
     redirect_to :action => 'index'
   end
 
@@ -58,7 +65,12 @@ class MembresController < ApplicationController
   def membres_param
     params.require(:membre).permit(:nom, :prenom, :age, :mdp,:email)
   end
-
+  
+  def logout
+    session.clear
+    flash[:msg] = "vous etes déconnecté maintenant"
+    redirect_to :controller=>'trajets', :action => 'search', :id => @membre
+  end
 
 
 end

@@ -1,4 +1,8 @@
 
+
+
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html><head>
 <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
@@ -30,6 +34,7 @@
 			</div>
 		</nav>
 
+		
 		<ul>
 			<% if session[:current_user_id] %>
 			<% session[:current_user_id].each do |m| %>
@@ -47,6 +52,7 @@
 
 			<% end %>
 		</ul>
+
 	</div>
 
 </header>
@@ -77,43 +83,70 @@
 	<!--Breadcrumbs-->
 	<ol class="breadcrumb">
 		<li><a href="/trajets/search">Acceuil</a></li>
-		<li><a href="">Mon profile</a></li>
+		<li><a href="#">Mes Reservations</a></li>
 		
 	</ol>
 	<!--/Breadcrumbs-->
 	<!-- pabel content -->
 	<div class="panel panel-default">
-		<div class="panel-heading"><h3>voir profile</h3></div>
+		<div class="panel-heading"><h3>Mes Reservations</h3></div>
 		<div class="panel-body" >
-			<%= link_to 'Ajouter  voiture', {:action => 'new'},{ :class=>"btn btn-primary" }  %><br><br>
 			<!--img src="../logo.png" class="img-responsive img-rounded" alt="Responsive image" style="width: 100%;height: 369px;"-->
 			<div class="jumbotron" align="center">
-                 	   <% if flash[:msg] %>
-		    <div id="success_msg" class="alert alert-success" role="alert"><%= flash[:msg] %></div>
-		    <script type="text/javascript">
-		     $('#success_msg').show().fadeIn(4000);
-		     
-		    </script>
-		  <% end %>
+				   <% if flash[:msg] %>
+			    <div id="success_msg" class="alert alert-success" role="alert"><%= flash[:msg] %></div>
+			    <script type="text/javascript">
+			     $('#success_msg').show().fadeIn(4000);
+			     
+			    </script>
+			  <% end %>
 
-				<strong>marque:</stong><%= @voiture.marque %><br>
+				<% session[:current_user_id].each do |m| %>
+				<% @va=  m["id"]       %>
 
-					<strong>nombre de place: </strong> $<%= @voiture.nb_place %><br />
-					<strong>matricule:</strong> <%= @voiture.matricule %><br />
-					<strong>couleur:</strong> <%= @voiture.couleur %><br />
-				
+				<% end %>
+				<table class="table"> 
+					<tr><td>trajet</td><td>nombre de place</td><td>membres</td><td>Action</td></tr>
+					
+                    
+					<% @reservations.each do |c| %>
+					
+					  <% if c.id_membre==@va %>
+					<tr>
+					<td>
+						
+						<%=  c.id_trajet    %>
+						
+					</td>
+					
+					<td>
+						<%=    c.place_res         %>
+					</td>
+					<td>
+						
+                          <% @membres.each do |m| %>
+                          <% if m.id==c.id_membre %> 
+                         <%=  m.nom+' '+m.prenom   %>
+                        <% end %>
+                        <% end %>
+						
+				   </td>
+				   <td>
+                   <%= link_to 'annuler', {:action => 'delete_reservation',:id => c.id},{ :class=>"btn btn-danger" }  %>
+				   </td>
+			   </tr>
+			
+			<% end %>
+			<% end %>
+			
+		</table>
 
 
-
-
-
-
-			</div>
-
-
-
-		</div>
 	</div>
+
+
+</div>
+</div>
 
 
 </div>
@@ -136,4 +169,19 @@
 	<p class="footer-company-name">Company Name &copy; 2016</p>
 
 </footer></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -1,11 +1,27 @@
+
+
 <%= form_tag :action => 'create' do %>
 
-
 <p><label for = "ville">nom ville</label>:
-<%= text_field 'villes', 'nom_ville' %></p>
+	<div >
+
+<%= text_field 'villes', 'nom_ville','data-validation'=>'date' %></p>
+</div>
+
+
+
+
 
 <%= submit_tag "Create" %>
 
-
 <% end -%>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.19/jquery.form-validator.min.js"></script>
+<script>
+  $.validate({
+    lang: 'fr'
+  });
+</script>
+
 <%= link_to 'Back', {:action => 'index'} %>

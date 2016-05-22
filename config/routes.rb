@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   
+  get 'trajets/delete_reservation'
+  get 'trajets/list_reservation'
   post 'trajets/reservation'
+  
   get '/membres/connexion'
 
   post '/membres/login'
@@ -90,6 +93,7 @@ Rails.application.routes.draw do
   patch 'conducteurs/update'
 
   get 'conducteurs/delete'
+    get 'membres/logout'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

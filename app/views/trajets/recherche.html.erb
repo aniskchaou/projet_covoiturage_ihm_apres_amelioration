@@ -1,31 +1,25 @@
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html><head>
 <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
 <title>Recherche Trajet</title></head>
 
 <!-- css -->
-<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css" media="screen, projection">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" media="screen, projection">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css" media="screen, projection">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" media="screen, projection">
-	<link rel="stylesheet" type="text/css" href="css/bootstraapt.css" media="screen, projection">
-	<link rel="stylesheet" type="text/css" href="css/footer-basic-centered.css" media="screen, projection">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+
+
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<!-- /css -->
+
 <!-- /css -->
 
 <!-- js -->
@@ -43,7 +37,19 @@
 			<%= image_tag  'logo1.png' ,'height':134 ,'width':154 %>
 			</div>
 		</nav>
-
+        		<ul>
+         <% if session[:current_user_id] %>
+        <% session[:current_user_id].each do |m| %>
+         <% @va=  m["id"]     %>
+         <%    @nom= m["nom"]    %>
+         <%    @prenom= m["prenom"]  %>
+         <% end %>
+		
+      
+        <li><span class="label label-success" >Bienvenue ! <%= @nom+' '+@prenom    %></span></li>
+  
+      <% end %>
+		</ul>
 	
 
 	</div>
@@ -54,14 +60,31 @@
 <!-- Menu pricipal -->
 <ul class="nav nav-tabs">
   <li role="presentation" class="active"><a href="#">Home</a></li>
-  <li role="presentation"><a href="#">Profile</a></li>
+
+
+<% if session[:current_user_id] %>
+<% session[:current_user_id].each do |m| %>
+<% @va=  m["id"]       %>
+
+<% end %>
+  <li role="presentation"><a href="/membres/<%=@va%>/">Mon Profile</a></li>
+  <li role="presentation"><a href="/trajets/new">Ajouter un trajet</a></li>
+  <li role="presentation"><a href="/trajets/">Mes trajets</a></li>
+    <li role="presentation"><a href="/trajets/list_reservation">Mes Reservations</a></li>
+  <li role="presentation"><a href="/membres/logout">Deconnexion</a></li>
+<% else %>
+  <li role="presentation"><a href="/membres/connexion">Connexion</a></li>
+  <li role="presentation"><a href="/membres/new">Inscription</a></li>
+
+<% end %>
+
 
 </ul>
 <!-- Menu pricipal -->
 <!--Breadcrumbs-->
 <ol class="breadcrumb">
-  <li><a href="#">Acceuil</a></li>
-  <li><a href="#">Trajet</a></li>
+  <li><a href="/trajets/search">Acceuil</a></li>
+  <li><a href="/trajets/">Trajet</a></li>
   <li class="active">Recherche</li>
 </ol>
 <!--/Breadcrumbs-->
@@ -71,7 +94,10 @@
 <div class="panel panel-default">
 <div class="panel-body">
 <% if @trajets.blank? %>
-<p>Il n'y a pas de trajet actuellement dans le système.</p>
+<div class="alert alert-danger" role="alert">
+Il n'y a pas de trajet actuellement dans le système.
+</div>
+
 <% else %>
 
 
@@ -82,7 +108,7 @@
          
            <div class="row">
   <div class="col-xs-6 col-sm-4">
- <div class="btn-group btn-group-justified" role="group" aria-label="...">
+ <div class="btn-group btn-group-justified" role="group" >
 
 			<div class="btn-group" role="group" style="padding-left: 106px;">
 			
@@ -126,7 +152,7 @@
  
   </div>
   <div class="col-xs-6 col-sm-4">
-  <h3><span class="label label-success"> Vendredi 28 avril 2016   7:40 </span></h3>
+  <h3><span class="label label-success">  <%= c.date %></span></h3>
   
   <p><span class="glyphicon glyphicon-export" aria-hidden="true" title="départ"><strong>   
   	<% @villes.each do |vi| %>
@@ -154,7 +180,7 @@
   <div class="col-xs-6 col-xs-offset-3 col-sm-4 col-sm-offset-0">
   
   <blockquote>
-  <p><span class="label label-danger">15 DT</span></p>
+  <p><span class="label label-danger"><%= c.prix   %> DT</span></p>
   <footer><span class="label label-warning">par place</span></footer>
   <strong><a href ="#">  </a><%= link_to 'lire l anonce', {:action => 'show', :id => c.id} -%></strong>
 </blockquote>

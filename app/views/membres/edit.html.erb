@@ -1,22 +1,138 @@
-<h1>modifier membre</h1>
 
-<%= form_for @membre, :url =>{:action => "update", :id =>@membre} do |f| %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+<title>index</title></head>
+
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="asset_path('bootstrap.min.css')" media="screen, projection">
+<link rel="stylesheet" type="text/css" href="asset_path('bootstrap.css')" media="screen, projection">
+<link rel="stylesheet" type="text/css" href="asset_path('bootstrap-theme.css')" media="screen, projection">
+<link rel="stylesheet" type="text/css" href="asset_path('bootstrap-theme.min.css')" media="screen, projection">
+<link rel="stylesheet" type="text/css" href="asset_path('bootstraapt.css')" media="screen, projection">
+<link rel="stylesheet" type="text/css" href="asset_path('footer-basic-centered.css')" media="screen, projection">
+<!-- /css -->
+
+<!-- js -->
+<script type="text/javascript" src="asset_path('bootstrap.js')"></script>
+<script type="text/javascript" src="asset_path('npm.js')"></script>
+<script type="text/javascript" src="asset_path('bootstrap.min.js')"></script>
+<!-- /js -->
+
+<header class="header-login-signup">
+
+	<div class="header-limiter">
+
+		<nav class="bootstraapt">
+			<div class="navbar-header">
+
+				<%= image_tag  'logo1.png' ,'height':134 ,'width':154 %>
+			</div>
+		</nav>
+
+		<ul>
+			<% if session[:current_user_id] %>
+			<% session[:current_user_id].each do |m| %>
+			<% @va=  m["id"]     %>
+			<%    @nom= m["nom"]    %>
+			<%    @prenom= m["prenom"]  %>
+			<% end %>
 
 
-<label>nom</label>
-<p> <%= f.text_field 'nom' %></p>
-<label>prenom</label>
-<p> <%= f.text_field 'prenom' %></p>
-<label>age</label>
-<p> <%= f.text_field 'age' %></p>
-<label>email</label>
-<p><%= f.text_field 'email' %></p>
-<label>mdp</label>
-<p> <%= f.text_field 'mdp' %></p>
+			<li><span class="label label-success" >Bienvenue ! <%= @nom+' '+@prenom    %></span></li>
+			<% else %>
 
-<%= f.submit "modifier" %>
-<% end %>
+			<li><a href="/membres/connexion">Login</a></li>
+			<li><a href="/membres/new">Inscription</a></li>
+
+			<% end %>
+		</ul>
+	</div>
+
+</header>
+
+<body style="padding-left: 115px;padding-right: 115px;">
+	<!-- Menu pricipal -->
+	<ul class="nav nav-tabs">
+		<li role="presentation" class="active"><a href="#">Home</a></li>
+		<% if session[:current_user_id] %>
+		<% session[:current_user_id].each do |m| %>
+		<% @va=  m["id"]       %>
+
+		<% end %>
+		<li role="presentation"><a href="/membres/<%=@va%>/">Mon Profile</a></li>
+		<li role="presentation"><a href="/trajets/new">Ajouter un trajet</a></li>
+		<li role="presentation"><a href="/trajets/">Mes trajets</a></li>
+		<li role="presentation"><a href="/membres/logout">Deconnexion</a></li>
+		<% else %>
+		<li role="presentation"><a href="/membres/connexion">Connexion</a></li>
+		<li role="presentation"><a href="/membres/new">Inscription</a></li>
+
+		<% end %>
+
+		
+	</ul>
+	<!-- Menu pricipal -->
+	<!--Breadcrumbs-->
+	<ol class="breadcrumb">
+		<li><a href="/trajets/search">Acceuil</a></li>
+		<li><a href="">Mon profile</a></li>
+		<li><a href="">Modifier</a></li>
+		
+	</ol>
+	<!--/Breadcrumbs-->
+	<!-- pabel content -->
+	<div class="panel panel-default">
+		<div class="panel-heading"><h3>Modifier profile</h3></div>
+		<div class="panel-body" >
+			<!--img src="../logo.png" class="img-responsive img-rounded" alt="Responsive image" style="width: 100%;height: 369px;"-->
+			<div class="jumbotron" align="center">
+				<%= form_for @membre, :url =>{:action => "update", :id =>@membre} do |f| %>
+
+
+				<label>nom</label>
+				<p> <%= f.text_field 'nom' %></p>
+				<label>prenom</label>
+				<p> <%= f.text_field 'prenom' %></p>
+				<label>age</label>
+				<p> <%= f.text_field 'age' %></p>
+				<label>email</label>
+				<p><%= f.text_field 'email' %></p>
+				<label>mdp</label>
+				<p> <%= f.text_field 'mdp' %></p>
+
+				<%= f.submit "modifier" %>
+				<% end %>
 
 
 
-<%= link_to 'Back', {:action => 'index' } %>
+			</div>
+
+
+
+		</div>
+	</div>
+
+
+</div>
+<!-- pabel content -->
+
+
+
+
+</body>
+<footer class="footer-basic-centered">
+
+	<p class="footer-company-motto">Covoiturage</p>
+
+	<p class="footer-links">
+		<a href="#">inscrption</a>
+		·
+		<a href="#">Blog</a>
+	</p>
+
+	<p class="footer-company-name">Company Name &copy; 2016</p>
+
+</footer></html>
+
+
