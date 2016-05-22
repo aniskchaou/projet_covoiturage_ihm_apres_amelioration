@@ -65,6 +65,13 @@
 		<div class="panel-body" >
 			<!--img src="../logo.png" class="img-responsive img-rounded" alt="Responsive image" style="width: 100%;height: 369px;"-->
 			<div class="jumbotron" align="center">
+						   <% if flash[:msg] %>
+		    <div id="success_msg" class="alert alert-danger" role="alert"><%= flash[:msg] %></div>
+		    <script type="text/javascript">
+		     $('#success_msg').show().fadeIn(4000);
+		     
+		    </script>
+		  <% end %>
 			        <div class="form-horizontal">
 	        <%= form_tag :action => 'login' do %>
 					<div class="form-group">
@@ -72,7 +79,7 @@
 						<div class="col-sm-4">
 						  <div class="input-group">
 							<div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></div>
-							<%= text_field 'membres', 'email',class:'form-control' %>
+							<%= text_field 'membres', 'email',{class:'form-control','data-validation':'email'} %>
 						  </div>
 						</div>
 					</div>
@@ -81,7 +88,7 @@
 						<div class="col-sm-4">
 						  <div class="input-group">
 							<div class="input-group-addon"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></div>
-							<%= password_field 'membres', 'mdp',class:'form-control' %>
+							<%= password_field 'membres', 'mdp',{class:'form-control','data-validation-length':'3-8'} %>
 						  </div>
 						</div>
 					</div>
@@ -103,6 +110,13 @@
 
 		</div>
 		<!-- pabel content -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.19/jquery.form-validator.min.js"></script>
+<script>
+  $.validate({
+    lang: 'fr'
+  });
+</script>
 
 
 

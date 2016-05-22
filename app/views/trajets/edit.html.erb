@@ -17,7 +17,7 @@
 <link rel="stylesheet" type="text/css" href="asset_path('bootstraapt.css')" media="screen, projection">
 <link rel="stylesheet" type="text/css" href="asset_path('footer-basic-centered.css')" media="screen, projection">
 <!-- /css -->
-
+<%= stylesheet_link_tag :datetimepicker %>
 <!-- js -->
 <script type="text/javascript" src="asset_path('bootstrap.js')"></script>
 <script type="text/javascript" src="asset_path('npm.js')"></script>
@@ -117,17 +117,14 @@
 								<%= collection_select(:trajets, :id_ville_destination, @villes, :id, :nom_ville, prompt: true)
 								%>
 								<br>
-								<script>
-								$(function() {
-									$( "#trajet_date" ).datepicker();
-								});
-								</script>
-								<%= f.text_field 'date' %>
+							  date<br>
+								<%= f.text_field 'date',{'class':'form-control'} %>
 								<br>
-								<%= f.text_field 'nbr_place' %>
+								nombre de place <br>
+								<%= f.text_field 'nbr_place',{'class':'form-control','data-validation':'number','data-validation-allowing':'range[1;6]'} %>
 								<br>
-
-								<%= f.text_field 'prix' %>
+                                  prix <br>
+								<%= f.text_field 'prix',{'class':'form-control','data-validation':'number'} %>
 
 								<%= f.submit "modifier" %>
 								<% end %>
@@ -146,7 +143,21 @@
 
 
 				</div>
+				<%= javascript_include_tag 'bootstrap-datetimepicker.js' %>
+				  <script type="text/javascript">
+                                    $("#trajet_date").datetimepicker({
+                                        format: "dd MM yyyy - hh:ii"
+                                    });
+                                </script> 
 				<!-- pabel content -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.19/jquery.form-validator.min.js"></script>
+<script>
+  $.validate({
+    lang: 'fr'
+  });
+</script>
+
 
 
 

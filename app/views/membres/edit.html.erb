@@ -91,15 +91,15 @@
 
 
 				<label>nom</label>
-				<p> <%= f.text_field 'nom' %></p>
+				<p> <%= f.text_field 'nom' ,{'class':'form-control','data-validation':'length','data-validation-length':'4-10'}%></p>
 				<label>prenom</label>
-				<p> <%= f.text_field 'prenom' %></p>
+				<p> <%= f.text_field 'prenom',{'class':'form-control','data-validation':'length','data-validation-length':'4-10'} %></p>
 				<label>age</label>
-				<p> <%= f.text_field 'age' %></p>
+				<p> <%= f.text_field 'age',{'class':'form-control','data-validation':'number','data-validation-length':'18-80'} %></p>
 				<label>email</label>
-				<p><%= f.text_field 'email' %></p>
+				<p><%= f.text_field 'email',{'class':'form-control','data-validation':'email'} %></p>
 				<label>mdp</label>
-				<p> <%= f.text_field 'mdp' %></p>
+				<p> <%= f.password_field 'mdp',{'class':'form-control','data-validation':'length','data-validation-length':'4-10'} %></p>
 
 				<%= f.submit "modifier" %>
 				<% end %>
@@ -116,7 +116,13 @@
 
 </div>
 <!-- pabel content -->
-
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.19/jquery.form-validator.min.js"></script>
+<script>
+  $.validate({
+    lang: 'fr'
+  });
+</script>
 
 
 

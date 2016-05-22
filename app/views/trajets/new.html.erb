@@ -10,7 +10,7 @@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-
+<%= stylesheet_link_tag :datetimepicker %>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <!-- /css -->
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
@@ -121,7 +121,7 @@
 						<div class="col-sm-6">
 						  <div class="input-group">
 							<div class="input-group-addon"><span class="glyphicon glyphicon-euro" aria-hidden="true"></span></div>
-							<%= text_field 'trajets', 'prix' ,class:'form-control' %> 
+							<%= text_field 'trajets', 'prix' ,{'class':'form-control','data-validation':'number'} %> 
 
 
 						  </div>
@@ -135,7 +135,7 @@
 						<div class="col-sm-6">
 						  <div class="input-group">
 							<div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></div>
-								<%= text_field 'trajets', 'nbr_place' ,class:'form-control' %>
+								<%= text_field 'trajets', 'nbr_place' ,{'class':'form-control','data-validation':'number','data-validation-allowing':'range[1;6]'} %>
 
 
 						  </div>
@@ -192,11 +192,13 @@
 						<div class="col-sm-6">
 						<%= text_field 'trajets', 'date' ,class:'form-control' %>
 						</div>
-						           <script type="text/javascript">
-                                $(function() {
-									$( "#trajets_date" ).datepicker();
-								});
-								</script>
+						        <%= javascript_include_tag 'bootstrap-datetimepicker.js' %>
+
+                                  <script type="text/javascript">
+                                    $("#trajets_date").datetimepicker({
+                                        format: "dd MM yyyy - hh:ii"
+                                    });
+                                </script>  
 
 						<label for="inputEmail3" class="col-sm-1 control-label">heure:</label>
 						<div class="col-sm-3">
@@ -220,6 +222,13 @@
   </div>
 </div>
 <!-- pabel content -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.19/jquery.form-validator.min.js"></script>
+<script>
+  $.validate({
+    lang: 'fr'
+  });
+</script>
 
 
 

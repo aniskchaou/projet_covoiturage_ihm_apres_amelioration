@@ -14,6 +14,7 @@ class MembresController < ApplicationController
     if params[:membres]
      @membres = Membre.search(params[:membres][:email],params[:membres][:mdp]).all
       if @membres.blank?
+        flash[:msg] = "email ou mot de passe est incorrecte "
         redirect_to  :action => 'connexion'
       else
         session[:current_user_id] = @membres
